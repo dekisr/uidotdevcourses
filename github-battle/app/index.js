@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
+import Popular from './components/Popular'
 
 // Component
 // State
@@ -9,11 +10,12 @@ import './index.css'
 
 export default class App extends React.Component {
   render() {
-    return <div>Hello F. World!</div>
+    return (
+      <div className="container">
+        <Popular />
+      </div>
+    )
   }
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('app')
-)
+ReactDOM.render(<App />, document.getElementById('app'))
