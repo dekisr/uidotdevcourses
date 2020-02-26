@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from './Card'
+import Tooltip from './Tooltip'
 import Loading from './Loading'
 import PropTypes from 'prop-types'
 import { battle } from '../utils/api'
@@ -21,14 +22,18 @@ function ProfileList({ profile }) {
       </li>
       {profile.location && (
         <li>
-          <FaCompass color="violet" size={22} />
-          {profile.location}
+          <Tooltip text="User's location">
+            <FaCompass color="violet" size={22} />
+            {profile.location}
+          </Tooltip>
         </li>
       )}
       {profile.company && (
         <li>
-          <FaBriefcase color="sienna" size={22} />
-          {profile.company}
+          <Tooltip text="User's company">
+            <FaBriefcase color="sienna" size={22} />
+            {profile.company}
+          </Tooltip>
         </li>
       )}
       <li>

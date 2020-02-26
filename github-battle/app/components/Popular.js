@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from './Card'
+import Tooltip from './Tooltip'
 import Loading from './Loading'
 import PropTypes from 'prop-types'
 import { fetchPopularRepos } from '../utils/api'
@@ -56,8 +57,10 @@ function ReposGrid({ repos }) {
             >
               <ul className="card-list">
                 <li>
-                  <FaUser color="sandybrown" size={22} />
-                  <a href={`https://github.com/${login}`}>{login}</a>
+                  <Tooltip text="Github username">
+                    <FaUser color="sandybrown" size={22} />
+                    <a href={`https://github.com/${login}`}>{login}</a>
+                  </Tooltip>
                 </li>
                 <li>
                   <FaStar color="gold" size={22} />
