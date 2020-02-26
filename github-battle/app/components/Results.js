@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from './Card'
+import Loading from './Loading'
 import PropTypes from 'prop-types'
 import { battle } from '../utils/api'
 import {
@@ -56,7 +57,7 @@ export default class Results extends React.Component {
     }
   }
   componentDidMount() {
-    const { playerOne, playerTwo, onReset } = this.props
+    const { playerOne, playerTwo } = this.props
     battle([playerOne, playerTwo])
       .then((players) => {
         this.setState({
@@ -69,14 +70,14 @@ export default class Results extends React.Component {
       .catch(({ message }) => {
         this.setState({
           error: message,
-          error: false
+          loading: false
         })
       })
   }
   render() {
     const { winner, loser, error, loading } = this.state
     if (loading === true) {
-      return <p>LOADING...</p>
+      return <Loading />
     }
     if (error) {
       return <p className="center-text error">{error}</p>
