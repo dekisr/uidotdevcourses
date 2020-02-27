@@ -1,5 +1,6 @@
 import React from 'react'
 import Results from './Results'
+import { ThemeConsumer } from '../contexts/theme'
 import PropTypes from 'prop-types'
 import {
   FaUserFriends,
@@ -10,23 +11,35 @@ import {
 
 function Instructions() {
   return (
-    <div className="instructions-container">
-      <h1 className="center-text header-lg">Instructions</h1>
-      <ol className="container-sm grid center-text battle-instructions">
-        <li>
-          <h3 className="header-sm">Enter two GitHub users</h3>
-          <FaUserFriends className="bg-light" color="sandybrown" size={140} />
-        </li>
-        <li>
-          <h3 className="header-sm">Battle</h3>
-          <FaFighterJet className="bg-light" color="darkslategrey" size={140} />
-        </li>
-        <li>
-          <h3 className="header-sm">See the winners</h3>
-          <FaTrophy className="bg-light" color="gold" size={140} />
-        </li>
-      </ol>
-    </div>
+    <ThemeConsumer>
+      {({ theme }) => (
+        <div className="instructions-container">
+          <h1 className="center-text header-lg">Instructions</h1>
+          <ol className="container-sm grid center-text battle-instructions">
+            <li>
+              <h3 className="header-sm">Enter two GitHub users</h3>
+              <FaUserFriends
+                className={`bg-${theme}`}
+                color="sandybrown"
+                size={140}
+              />
+            </li>
+            <li>
+              <h3 className="header-sm">Battle</h3>
+              <FaFighterJet
+                className={`bg-${theme}`}
+                color="darkslategrey"
+                size={140}
+              />
+            </li>
+            <li>
+              <h3 className="header-sm">See the winners</h3>
+              <FaTrophy className={`bg-${theme}`} color="gold" size={140} />
+            </li>
+          </ol>
+        </div>
+      )}
+    </ThemeConsumer>
   )
 }
 
@@ -53,29 +66,33 @@ class PlayerInput extends React.Component {
 
   render() {
     return (
-      <form className="column player" onSubmit={this.handleSubmit}>
-        <label htmlFor="username" className="player-label">
-          {this.props.label}
-        </label>
-        <div className="row player-inputs">
-          <input
-            type="text"
-            id="username"
-            placeholder="github username"
-            autoComplete="off"
-            className="input-light"
-            value={this.state.username}
-            onChange={this.handleChange}
-          />
-          <button
-            type="submit"
-            disabled={!this.state.username}
-            className="btn dark-btn"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
+      <ThemeConsumer>
+        {({ theme }) => (
+          <form className="column player" onSubmit={this.handleSubmit}>
+            <label htmlFor="username" className="player-label">
+              {this.props.label}
+            </label>
+            <div className="row player-inputs">
+              <input
+                type="text"
+                id="username"
+                placeholder="github username"
+                autoComplete="off"
+                className={`input-${theme}`}
+                value={this.state.username}
+                onChange={this.handleChange}
+              />
+              <button
+                type="submit"
+                disabled={!this.state.username}
+                className={`btn ${theme === 'dark' ? 'light-btn' : 'dark-btn'}`}
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        )}
+      </ThemeConsumer>
     )
   }
 }
@@ -86,24 +103,28 @@ PlayerInput.propTypes = {
 
 function PlayerPreview({ username, onReset, label }) {
   return (
-    <div className="column player">
-      <h3 className="player-label">{label}</h3>
-      <div className="row bg-light">
-        <div className="player-info">
-          <img
-            src={`https://github.com/${username}.png?size=200`}
-            alt={`Avatar for ${username}`}
-            className="avatar-small"
-          />
-          <a href={`https://github.com/${username}`} className="link">
-            {username}
-          </a>
+    <ThemeConsumer>
+      {({ theme }) => (
+        <div className="column player">
+          <h3 className="player-label">{label}</h3>
+          <div className={`row bg-${theme}`}>
+            <div className="player-info">
+              <img
+                src={`https://github.com/${username}.png?size=200`}
+                alt={`Avatar for ${username}`}
+                className="avatar-small"
+              />
+              <a href={`https://github.com/${username}`} className="link">
+                {username}
+              </a>
+            </div>
+            <button className="btn-clear flex-center" onClick={onReset}>
+              <FaTimesCircle color="crimson" size={26} />
+            </button>
+          </div>
         </div>
-        <button className="btn-clear flex-center" onClick={onReset}>
-          <FaTimesCircle color="crimson" size={26} />
-        </button>
-      </div>
-    </div>
+      )}
+    </ThemeConsumer>
   )
 }
 PlayerPreview.propTypes = {
