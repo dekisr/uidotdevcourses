@@ -17,7 +17,6 @@ export default function Loading({ text = 'Loading', speed = 300 }) {
 
   React.useEffect(() => {
     const id = window.setInterval(() => {
-      console.log('eita', id)
       setContent((cnt) => {
         return cnt === `${text}...` ? text : `${cnt}.`
       })
