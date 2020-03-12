@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './Home'
 import Players from './Players'
 import Teams from './Teams'
@@ -11,9 +11,14 @@ export default class App extends Component {
       <Router>
         <div>
           <Navbar />
-          <Route exact path="/" component={Home} />
-          <Route path="/players" component={Players} />
-          <Route path="/teams" component={Teams} />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/players" component={Players} />
+            <Route path="/teams" component={Teams} />
+            <Route
+              render={() => <h1 className="text-center">Four oh Four.</h1>}
+            />
+          </Switch>
         </div>
       </Router>
     )
