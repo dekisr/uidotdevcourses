@@ -5,6 +5,7 @@ import Players from './Players'
 import Teams from './Teams'
 import Navbar from './Navbar'
 import TeamPage from './TeamPage'
+import Articles from './Articles'
 
 export default class App extends Component {
   render() {
@@ -17,6 +18,7 @@ export default class App extends Component {
             <Route path="/players" component={Players} />
             <Route path="/teams" component={Teams} />
             <Route exact path="/:teamId" component={TeamPage} />
+            <Route path="/:teamId/articles" component={Articles} />
             <Route
               render={() => <h1 className="text-center">Four oh Four.</h1>}
             />
