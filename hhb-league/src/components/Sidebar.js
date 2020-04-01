@@ -2,11 +2,12 @@ import React from 'react'
 import { Link, Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import slug from 'slug'
+import Loading from './Loading'
 
 export default function Sidebar({ title, list, loading, location, match }) {
   // prettier-ignore
   return loading === true
-  ? <h1>LOADING</h1>
+  ? <Loading text="Loading" />
   : <div>
       <h3 className="header">{title}</h3>
       <ul className="sidebard-list">
