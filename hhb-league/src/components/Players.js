@@ -4,17 +4,18 @@ import Sidebar from './Sidebar'
 import { getPlayers } from '../api'
 import { parse } from 'query-string'
 import slug from 'slug'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 export default class Players extends Component {
   state = {
     players: [],
-    loading: true
+    loading: true,
   }
   fetchPlayers = (teamId) => {
     getPlayers(teamId).then((players) =>
       this.setState({
         loading: false,
-        players
+        players,
       })
     )
   }
@@ -51,18 +52,28 @@ export default class Players extends Component {
               apg,
               ppg,
               rpg,
-              spg
+              spg,
             } = players.find(
               (player) => slug(player.name) === match.params.playerId
             )
             return (
-              <div className="panel">
-                <img src={avatar} alt={`${name}'s avatar`} className="avatar" />
-                <h1 className="medium-header">{name}</h1>
-                <h3 className="header">#{number}</h3>
-                <div className="row">
-                  {/* prettier-ignore */}
-                  <ul className="info-list" style={{ marginRight: 80 }}>
+              <TransitionGroup className="panel">
+                <CSSTransition
+                  key={location.key}
+                  timeout={{ enter: 500, exit: 300 }}
+                  classNames="fade"
+                >
+                  <div className="panel">
+                    <img
+                      src={avatar}
+                      alt={`${name}'s avatar`}
+                      className="avatar"
+                    />
+                    <h1 className="medium-header">{name}</h1>
+                    <h3 className="header">#{number}</h3>
+                    <div className="row">
+                      {/* prettier-ignore */}
+                      <ul className="info-list" style={{ marginRight: 80 }}>
                     <li>
                       Team
                       <div>
@@ -74,13 +85,21 @@ export default class Players extends Component {
                     <li>Position<div>{position}</div></li>
                     <li>PPG<div>{ppg}</div></li>
                   </ul>
-                  <ul className="info-list">
-                    <li>APG<div>{apg}</div></li>
-                    <li>RPG<div>{rpg}</div></li>
-                    <li>SPG <div>{spg}</div></li>
-                  </ul>
-                </div>
-              </div>
+                      <ul className="info-list">
+                        <li>
+                          APG<div>{apg}</div>
+                        </li>
+                        <li>
+                          RPG<div>{rpg}</div>
+                        </li>
+                        <li>
+                          SPG <div>{spg}</div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </CSSTransition>
+              </TransitionGroup>
             )
           }}
         />
