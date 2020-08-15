@@ -12,7 +12,7 @@ const CustomLink = ({ to, children }) => {
 }
 
 const Sidebar = ({ title, list }) => {
-  const { url } = useRouteMatch()
+  const { path, url } = useRouteMatch()
   const location = useLocation()
   return (
     <nav>
@@ -21,7 +21,7 @@ const Sidebar = ({ title, list }) => {
         {list.map((item) => (
           <CustomLink
             key={item}
-            to={{ pathname: `${url}/${slug(item)}`, search: location.search }}
+            to={{ pathname: `${path}/${slug(item)}`, search: location.search }}
           >
             {item.toUpperCase()}
           </CustomLink>

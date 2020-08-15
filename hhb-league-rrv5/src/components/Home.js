@@ -6,7 +6,9 @@ import useTeamNames from '../hooks/useTeamNames'
 const Home = () => {
   const { loading, response: teamNames } = useTeamNames()
 
-  return loading ? null : (
+  return loading ? (
+    <p>LOADING</p>
+  ) : (
     <div className="container">
       <h1 className="large-header">Hash History Basketball League</h1>
       <h3 className="header text-center">Select a Team</h3>
