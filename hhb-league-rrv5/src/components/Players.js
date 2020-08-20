@@ -11,6 +11,7 @@ import { parse } from 'query-string'
 import slug from 'slug'
 import usePlayers from '../hooks/usePlayers'
 import Sidebar from './Sidebar'
+import Loading from './Loading'
 
 const Player = ({ players }) => {
   const { playerId } = useParams()
@@ -65,7 +66,7 @@ const Players = () => {
   const { loading, response: players } = usePlayers(team)
 
   return loading ? (
-    <p>LOADING</p>
+    <Loading />
   ) : (
     <div className="container two-column">
       <Sidebar title="Players" list={players.map((player) => player.name)} />

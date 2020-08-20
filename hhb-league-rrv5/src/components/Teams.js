@@ -4,6 +4,7 @@ import useTeam from '../hooks/useTeam'
 import Sidebar from '../components/Sidebar'
 import TeamLogo from '../components/TeamLogo'
 import { Route, Link, Switch, useRouteMatch, useParams } from 'react-router-dom'
+import Loading from './Loading'
 
 const Team = () => {
   const { teamId } = useParams()
@@ -38,7 +39,7 @@ const Teams = () => {
   const { url } = useRouteMatch()
 
   return loading ? (
-    <p>LOADING</p>
+    <Loading />
   ) : (
     <div className="container two-column">
       <Sidebar title="Teams" list={teamNames} />

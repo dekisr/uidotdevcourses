@@ -6,6 +6,7 @@ import useTeamNames from '../hooks/useTeamNames'
 import useTeamsArticles from '../hooks/useTeamsArticles'
 import useTeam from '../hooks/useTeam'
 import TeamLogo from './TeamLogo'
+import Loading from './Loading'
 
 // prettier-ignore
 const useTeamPageData = (teamId) => {
@@ -36,7 +37,7 @@ const TeamPage = () => {
   const { teamNames, articles, team, loading } = useTeamPageData(teamId)
 
   return loading ? (
-    <p>LOADING</p>
+    <Loading />
   ) : !teamNames.includes(teamId) ? (
     <h1 className="text-center">The {teamId} is not a valid team.</h1>
   ) : (

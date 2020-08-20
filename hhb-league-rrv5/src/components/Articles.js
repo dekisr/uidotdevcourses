@@ -3,6 +3,7 @@ import { useParams, Switch, Route, useRouteMatch } from 'react-router-dom'
 import useTeamsArticles from '../hooks/useTeamsArticles'
 import useArticle from '../hooks/useArticle'
 import Sidebar from './Sidebar'
+import Loading from './Loading'
 
 const Article = () => {
   const { teamId, articleId } = useParams()
@@ -23,7 +24,7 @@ const Articles = () => {
   const { response: articles, loading } = useTeamsArticles(teamId)
 
   return loading ? (
-    <p>LOADING</p>
+    <Loading />
   ) : (
     <div className="container two-column">
       <Sidebar
