@@ -5,6 +5,7 @@ import Players from './Players'
 import Teams from './Teams'
 import Navbar from './Navbar'
 import TeamPage from './TeamPage'
+import Articles from './Articles'
 
 const App = () => {
   return (
@@ -23,6 +24,9 @@ const App = () => {
           </Route>
           <Route exact path="/:teamId">
             <TeamPage />
+          </Route>
+          <Route path="/:teamId/articles">
+            <Articles />
           </Route>
           <Route path="*">
             <h1 className="text-center">Four oh Four...</h1>

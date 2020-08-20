@@ -60,7 +60,7 @@ const Player = ({ players }) => {
 
 const Players = () => {
   const location = useLocation()
-  const { path, url } = useRouteMatch()
+  const { path } = useRouteMatch()
   const team = location.search ? parse(location.search).teamId : null
   const { loading, response: players } = usePlayers(team)
 
