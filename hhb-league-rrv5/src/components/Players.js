@@ -12,6 +12,7 @@ import slug from 'slug'
 import usePlayers from '../hooks/usePlayers'
 import Sidebar from './Sidebar'
 import Loading from './Loading'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 const Player = ({ players }) => {
   const { playerId } = useParams()
@@ -70,14 +71,18 @@ const Players = () => {
   ) : (
     <div className="container two-column">
       <Sidebar title="Players" list={players.map((player) => player.name)} />
-      <Switch>
-        <Route path={`${path}/:playerId`}>
-          <Player players={players} />
-        </Route>
-        <Route path="*">
-          <div className="sidebar-instruction">Select a Player</div>
-        </Route>
-      </Switch>
+      <TransitionGroup component={null}>
+        <CSSTransition timeout={500} classNames="fade" key={location.key}>
+          <Switch location={location}>
+            <Route path={`${path}/:playerId`}>
+              <Player players={players} />
+            </Route>
+            <Route path="*">
+              <div className="sidebar-instruction">Select a Player</div>
+            </Route>
+          </Switch>
+        </CSSTransition>
+      </TransitionGroup>
     </div>
   )
 }
